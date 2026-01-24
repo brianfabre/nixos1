@@ -32,7 +32,7 @@
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         # > Our main nixos configuration file <
-        modules = [ ./nixos/configuration.nix ];
+        modules = [./nixos/configuration.nix];
       };
     };
 
@@ -43,14 +43,14 @@
         # Home-manager requires 'pkgs' instance
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
-	  inherit inputs;
-	  pkgsUnstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
-	};
+          inherit inputs;
+          pkgsUnstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
+        };
         # > Our main home-manager configuration file <
         modules = [
-	  inputs.plasma-manager.homeModules.plasma-manager
-	  ./home-manager/home.nix
-	];
+          inputs.plasma-manager.homeModules.plasma-manager
+          ./home-manager/home.nix
+        ];
       };
     };
   };

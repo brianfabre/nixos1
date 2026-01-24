@@ -51,9 +51,8 @@
     enable = true;
     enableZshIntegration = true;
   };
-  home.packages = 
-    (with pkgs; [ 
-      lf
+  home.packages =
+    (with pkgs; [
       fd
       ripgrep
       tealdeer
@@ -62,11 +61,13 @@
       btop
       lazygit
 
+      alejandra
+      iosevka
+
       # wayland
       wl-clipboard
     ])
-    ++
-    (with pkgsUnstable; [
+    ++ (with pkgsUnstable; [
       mullvad-browser
     ]);
 
@@ -83,14 +84,28 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-  
+
     shellAliases = {
-      ll = "ls -l";
+      ll = "eza -lah";
+      rm = "rm -i";
+      mv = "mv -i";
       nv = "nvim";
       hm = "home-manager switch --flake $HOME/nix-config#brian@nixos";
       os = "sudo nixos-rebuild switch --flake $HOME/nix-config#nixos";
     };
     history.size = 10000;
+  };
+
+  programs.eza = {
+    enable = true;
+    git = true;
+  };
+
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {font = "Iosevka Extended:size=12";};
+    };
   };
 
   # Enable Plasma Manager
@@ -99,8 +114,8 @@
     overrideConfig = true;
 
     input.keyboard = {
-      repeatDelay = 400;   # milliseconds before repeat starts
-      repeatRate  = 50;    # repeats per second
+      repeatDelay = 400; # milliseconds before repeat starts
+      repeatRate = 50; # repeats per second
     };
 
     # Example: set a theme, colors, etc.
@@ -115,9 +130,9 @@
 
     shortcuts = {
       kwin = {
-	"Switch to Desktop 1" = "Meta+1"; 
-        "Switch to Desktop 2" = "Meta+2"; 
-        "Switch to Desktop 3" = "Meta+3"; 
+        "Switch to Desktop 1" = "Meta+1";
+        "Switch to Desktop 2" = "Meta+2";
+        "Switch to Desktop 3" = "Meta+3";
 
         "Window to Desktop 1" = "Meta+!";
         "Window to Desktop 2" = "Meta+@";
