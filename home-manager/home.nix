@@ -47,15 +47,19 @@
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
   programs.firefox.enable = true;
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   home.packages = 
     (with pkgs; [ 
       lf
       fd
-      fzf
       ripgrep
       tealdeer
       yazi
 
+      btop
       lazygit
 
       # wayland
@@ -74,9 +78,30 @@
     userEmail = "brian@localhost";
   };
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+  
+    shellAliases = {
+      ll = "ls -l";
+      nv = "nvim";
+      hm = "home-manager switch --flake $HOME/nix-config#brian@nixos";
+      os = "sudo nixos-rebuild switch --flake $HOME/nix-config#nixos";
+    };
+    history.size = 10000;
+  };
+
   # Enable Plasma Manager
   programs.plasma = {
     enable = true;
+    overrideConfig = true;
+
+    input.keyboard = {
+      repeatDelay = 400;   # milliseconds before repeat starts
+      repeatRate  = 50;    # repeats per second
+    };
 
     # Example: set a theme, colors, etc.
     workspace.lookAndFeel = "org.kde.breezedark.desktop";
@@ -88,19 +113,6 @@
       command = "konsole";
     };
 
-    # remove shortcut to use with switch desktop
-    shortcuts.plasmashell = {
-      "activate task manager entry 1" = "";
-      "activate task manager entry 2" = "";
-      "activate task manager entry 3" = "";
-      "activate task manager entry 4" = "";
-      "activate task manager entry 5" = "";
-      "activate task manager entry 6" = "";
-      "activate task manager entry 7" = "";
-      "activate task manager entry 8" = "";
-      "activate task manager entry 9" = "";
-    };
-
     shortcuts = {
       kwin = {
 	"Switch to Desktop 1" = "Meta+1"; 
@@ -110,6 +122,9 @@
         "Window to Desktop 1" = "Meta+!";
         "Window to Desktop 2" = "Meta+@";
         "Window to Desktop 3" = "Meta+#";
+      };
+      "org.kde.krunner.desktop" = {
+        "_launch" = "Meta+Space";
       };
     };
 
@@ -127,6 +142,16 @@
         translucency.enable = true;
 
         wobblyWindows.enable = true;
+      };
+
+      nightLight = {
+        enable = true;
+        mode = "times";
+        time.evening = "19:30";
+        time.morning = "06:30";
+        transitionTime = 60;
+        temperature.day = 6500;
+        temperature.night = 3500;
       };
 
       # System Settings > Window Management > Virtual Desktops
