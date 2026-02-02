@@ -14,7 +14,7 @@
     # inputs.nix-colors.homeManagerModule
 
     # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ./nvim/nvim.nix
   ];
 
   nixpkgs = {
@@ -45,7 +45,6 @@
   };
 
   # Add stuff for your user as you see fit:
-  programs.neovim.enable = true;
   programs.firefox.enable = true;
   programs.fzf = {
     enable = true;
@@ -113,9 +112,11 @@
     enable = true;
     overrideConfig = true;
 
-    input.keyboard = {
-      repeatDelay = 400; # milliseconds before repeat starts
-      repeatRate = 50; # repeats per second
+    input = {
+      keyboard = {
+        repeatDelay = 400; # milliseconds before repeat starts
+        repeatRate = 50; # repeats per second
+      };
     };
 
     # Example: set a theme, colors, etc.

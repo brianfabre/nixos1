@@ -17,7 +17,7 @@
     # ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
+    ./hardware-configuration1.nix
   ];
 
   nixpkgs = {
@@ -72,7 +72,8 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.initrd.luks.devices."luks-126147a9-5d31-446f-8f33-8f0ea8633d18".device = "/dev/disk/by-uuid/126147a9-5d31-446f-8f33-8f0ea8633d18";
+  # boot.initrd.luks.devices."luks-126147a9-5d31-446f-8f33-8f0ea8633d18".device = "/dev/disk/by-uuid/126147a9-5d31-446f-8f33-8f0ea8633d18";
+  boot.initrd.luks.devices."luks-a16834c9-7b48-43dc-b138-40cca1713939".device = "/dev/disk/by-uuid/a16834c9-7b48-43dc-b138-40cca1713939";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
